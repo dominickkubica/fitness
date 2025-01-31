@@ -38,7 +38,7 @@ def generate_meal_plan_gpt4(profile_data, mode="Casual"):
     and example foods per meal.
     """
     
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7,
@@ -64,7 +64,7 @@ def generate_workout_plan_gpt4(profile_data, mode="Casual"):
     exercises, sets, reps, and any cardio/conditioning advice.
     """
     
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7,
@@ -94,8 +94,8 @@ def chat_with_gpt4(user_query: str):
     
     USER QUERY: {user_query}
     """
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
+    response = client.chat.completions.create(
+        model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.2,
         max_tokens=500
