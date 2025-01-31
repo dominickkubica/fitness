@@ -1,18 +1,12 @@
 import streamlit as st
-import openai
 import plotly.express as px
 import pandas as pd
 import numpy as np
-import time
 import os
+import openai  # Corrected import
 
-###############################################################################
-# 1. SETUP OPENAI (GPT-4)
-###############################################################################
-
-# Replace with your own key or reference it via an environment variable.
-# For security, do NOT hardcode in production.
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY", "YOUR_OPENAI_API_KEY"))
+# ✅ Initialize OpenAI client correctly
+client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY", "YOUR_OPENAI_API_KEY"))
 
 ###############################################################################
 # 2. GENERATIVE AI FUNCTIONS (GPT-4)
@@ -20,22 +14,20 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY", "YOUR_OPENAI_API_KEY"))
 
 def generate_meal_plan_gpt4(profile_data, mode="Casual"):
     """
-    Generates a meal plan (including macros) using GPT-4 based on user profile data.
-    mode can be "Casual" or "Advanced".
+    Generates a meal plan using GPT-4 based on user profile data.
     """
     prompt = f"""
-    You are an expert fitness coach. The user profile is as follows:
-    Age: {profile_data.get('age')}
-    Gender: {profile_data.get('gender')}
-    Weight: {profile_data.get('weight')} lbs
-    Height: {profile_data.get('height')} inches
-    Activity Level: {profile_data.get('activity_level')}
-    Fitness Goal: {profile_data.get('goal')}
-    Dietary Preference: {profile_data.get('diet_preference')}
+    You are a professional fitness coach. The user profile:
     
-    Provide a {mode.lower()} meal plan for the next 7 days. 
-    Include daily calorie targets, recommended macros (protein, carbs, fats), 
-    and example foods per meal.
+    - Age: {profile_data.get('age')}
+    - Gender: {profile_data.get('gender')}
+    - Weight: {profile_data.get('weight')} lbs
+    - Height: {profile_data.get('height')} inches
+    - Activity Level: {profile_data.get('activity_level')}
+    - Fitness Goal: {profile_data.get('goal')}
+    - Dietary Preference: {profile_data.get('diet_preference')}
+
+    Provide a {mode.lower()} meal plan for 7 days.
     """
     
     response = client.chat.completions.create(
@@ -45,7 +37,8 @@ def generate_meal_plan_gpt4(profile_data, mode="Casual"):
         max_tokens=700
     )
     
-    return response["choices"][0]["message"]["content"]
+    return response.choices[0].message.content
+
 
 def generate_workout_plan_gpt4(profile_data, mode="Casual"):
     """
