@@ -12,7 +12,7 @@ import os
 
 # Replace with your own key or reference it via an environment variable.
 # For security, do NOT hardcode in production.
-openai.api_key = os.getenv("OPENAI_API_KEY", "YOUR_OPENAI_API_KEY")
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY", "YOUR_OPENAI_API_KEY"))
 
 ###############################################################################
 # 2. GENERATIVE AI FUNCTIONS (GPT-4)
