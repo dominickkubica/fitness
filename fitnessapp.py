@@ -39,7 +39,7 @@ def generate_meal_plan_gpt4(profile_data, mode="Casual"):
     """
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7,
         max_tokens=700
@@ -65,7 +65,7 @@ def generate_workout_plan_gpt4(profile_data, mode="Casual"):
     """
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7,
         max_tokens=700
@@ -149,7 +149,7 @@ def page_dashboard():
     - Switch between Casual and Advanced modes  
     - View recommended meal plan, workout plan, water intake  
     - Visualize progress  
-    - Chat with GPT-4 (direct)
+    - Chat with Fitness Coach (direct)
     """
     st.title("Fitness Coach Dashboard")
     
