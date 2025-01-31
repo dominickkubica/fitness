@@ -3,7 +3,8 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 import os
-import openai  # Corrected import
+from openai import OpenAI  # Correct way to import
+  # Corrected import
 
 # ✅ Initialize OpenAI client correctly
 client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY", "YOUR_OPENAI_API_KEY"))
